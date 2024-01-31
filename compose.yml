@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  api:
+    container_name: goapi
+    image: goapi:1.0.0
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    environment:
+      DB_URL: "postgres://postgres:123@psg:5432/goweb?sslmode=disable"
+    ports:
+      - 7000:7000
+    depends_on:
+      - db
+
+  db:
+    container_name: psg
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: postgres
+      POSTGRES_DB: goweb
+    ports:
+      - 5432:5432
+    volumes:
+      - /tmp/postgresql:/var/lib/postgresql/data
