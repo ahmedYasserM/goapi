@@ -5,7 +5,7 @@ services:
     container_name: goapi
     image: ahmedyasser9/goapi:1.0.0
     build:
-      context: .
+      context: cmd/.
       dockerfile: Dockerfile
     environment:
       DB_URL: "postgres://postgres:123@psg:5432/goweb?sslmode=disable"

@@ -1,10 +1,9 @@
 package storage
 
 import (
-	"fmt"
 	"os"
 
-	"github.com/ahmedYasserM/goapi/types"
+	"github.com/ahmedYasserM/goapi/cmd/types"
 	"github.com/jmoiron/sqlx"
 
 	_ "github.com/lib/pq"
@@ -15,7 +14,6 @@ type Postgres struct {
 }
 
 func NewPostgres() (*Postgres, error) {
-	fmt.Printf("DB_URL: %s\n", os.Getenv("DB_URL"))
 	db, err := sqlx.Open("postgres", os.Getenv("DB_URL"))
 	return &Postgres{db: db}, err
 }

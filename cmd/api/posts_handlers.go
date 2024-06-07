@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ahmedYasserM/goapi/types"
+	"github.com/ahmedYasserM/goapi/cmd/types"
 )
 
 func (s *Server) handleCreatePost(w http.ResponseWriter, r *http.Request) {

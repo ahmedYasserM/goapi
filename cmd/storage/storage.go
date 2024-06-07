@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/ahmedYasserM/goapi/types"
+import "github.com/ahmedYasserM/goapi/cmd/types"
 
 type Storage interface {
 	CreatePost(post *types.Post) error

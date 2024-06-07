@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/ahmedYasserM/goapi/api"
-	"github.com/ahmedYasserM/goapi/storage"
+	"github.com/ahmedYasserM/goapi/cmd/api"
+	"github.com/ahmedYasserM/goapi/cmd/storage"
 )
 
 func main() {
@@ -19,5 +19,8 @@ func main() {
 
 	server := api.NewServer(*port, db)
 	log.Printf("Server is running on port %s\n", *port)
-	log.Fatalf("%s\n", server.Start())
+
+	if err := server.Start(); err != nil {
+		log.Fatalf("Error in starting the server: %v\n", err)
+	}
 }
