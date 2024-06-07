@@ -3,7 +3,7 @@
 services:
   api:
     container_name: goapi
-    image: goapi:1.0.0
+    image: ahmedyasser9/goapi:1.0.0
     build:
       context: .
       dockerfile: Dockerfile
