@@ -1,8 +1,9 @@
 package api
 
 import (
-	"github.com/ahmedYasserM/goapi/cmd/storage"
 	"net/http"
+
+	"github.com/ahmedYasserM/goapi/cmd/storage"
 )
 
 type Server struct {
@@ -28,7 +29,7 @@ func (s *Server) Start() error {
 	router.HandleFunc("PATCH /posts/{id}", s.handleModifyPostById)
 	router.HandleFunc("DELETE /posts/{id}", s.handleDeletePostById)
 
-	server := http.Server{Addr: s.port, Handler: router}
+	server := http.Server{Addr: s.port, Handler: JsonContentTypeMiddleWare(router)}
 
 	return server.ListenAndServe()
 }

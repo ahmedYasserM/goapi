@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"os"
+	// "os"
 
 	"github.com/ahmedYasserM/goapi/cmd/types"
 	"github.com/jmoiron/sqlx"
@@ -9,18 +9,34 @@ import (
 	_ "github.com/lib/pq"
 )
 
+var schema string = `
+CREATE TABLE IF NOT EXISTS posts (
+  id SERIAL PRIMARY KEY,
+  content TEXT,
+  author VARCHAR(255)
+);`
+
 type Postgres struct {
 	db *sqlx.DB
 }
 
 func NewPostgres() (*Postgres, error) {
-	db, err := sqlx.Open("postgres", os.Getenv("DB_URL"))
+	db, err := sqlx.Open("postgres", "postgres://postgres:123@localhost:5432/goweb?sslmode=disable")
+	// db, err := sqlx.Open("postgres", os.Getenv("DB_URL"))
+
+	if err != nil {
+		return nil, err
+	}
+
+	db.MustExec(schema)
+
 	return &Postgres{db: db}, err
 }
 
 func (psg *Postgres) CreatePost(post *types.Post) (err error) {
 
 	stmt, err := psg.db.Prepare("INSERT INTO posts (content, author) VALUES ($1, $2) RETURNING id;")
+	defer stmt.Close()
 
 	if err != nil {
 		return err

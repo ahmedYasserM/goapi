@@ -16,6 +16,5 @@ func (s *Server) handleRoot(w http.ResponseWriter, _ *http.Request) {
 
 	w.Write(res)
 
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 }

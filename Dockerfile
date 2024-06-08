@@ -3,10 +3,11 @@ FROM golang:1.22.4-alpine3.20 AS build
 
 WORKDIR /app
 
-COPY . .
+COPY go.mod go.sum ./
 
-# Download dependencies
-RUN go get -d -v ./...
+RUN go mod download
+
+COPY . .
 
 # Build the application
 RUN go build -o server .

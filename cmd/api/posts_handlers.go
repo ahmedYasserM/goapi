@@ -13,8 +13,6 @@ import (
 func (s *Server) handleCreatePost(w http.ResponseWriter, r *http.Request) {
 	decdoder := json.NewDecoder(r.Body)
 
-	w.Header().Set("Content-Type", "application/json")
-
 	var p types.Post
 	err := decdoder.Decode(&p)
 	if err != nil {
@@ -45,8 +43,6 @@ func (s *Server) handleShowAllPosts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "\t")
 	err = encoder.Encode(posts)
@@ -67,8 +63,6 @@ func (s *Server) handleShowPostById(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-	w.Header().Set("Content-Type", "application/json")
 
 	p, err := s.db.GetPostById(id)
 	if err != nil {
