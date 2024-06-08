@@ -1,9 +1,5 @@
-drop table if exists posts cascade;
-
-
-create table posts (
-  id serial primary key,
-  content text,
-  author varchar(255)
+CREATE TABLE posts (
+  id SERIAL PRIMARY KEY,
+  content TEXT,
+  author VARCHAR(255)
 );
-
